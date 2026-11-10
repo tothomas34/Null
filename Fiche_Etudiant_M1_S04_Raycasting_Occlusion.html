@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fiche_Etudiant_M1_S04_Raycasting_Occlusion.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="master-1--game-programming--realtime-3d-engines">Master 1 — Game Programming / Realtime 3D Engines</h1>
+<h2 id="séance-4--raycasting--occlusion">Séance 4 — Raycasting &amp; Occlusion</h2>
+<h3 id="ligne-de-vue-et-cône-de-vision">Ligne de vue et cône de vision</h3>
+<p>Cette séance formalise un capteur de vision temps réel : filtrage géométrique peu coûteux, validation de ligne de vue par raycast, estimation de visibilité partielle, puis représentation procédurale du champ de vision occulté.</p>
+<h2 id="objectifs-opérationnels">Objectifs opérationnels</h2>
+<p>À l’issue de la séance, vous devriez pouvoir :</p>
+<ul>
+<li>concevoir une détection en cascade et justifier l’ordre des tests par leur coût CPU ;</li>
+<li>lancer un raycast à partir d’une origine et d’une direction correctement définies, avec une portée et un filtrage explicites ;</li>
+<li>distinguer cible dans le champ de vision, cible non occultée et cible partiellement visible (utilisateur avancés) ;</li>
+<li>générer un maillage de vision en éventail, en convertissant correctement les coordonnées monde et locales (utilisateur avancés) ;</li>
+<li>maintenir une allocation managée nulle par frame dans le chemin de mise à jour du maillage, et le vérifier au Profiler.</li>
+</ul>
+<h2 id="1-rappel-théorique--notions-clés">1. Rappel théorique &amp; notions clés</h2>
+<h3 id="11-pipeline-en-cascade-de-détection">1.1 Pipeline en cascade de détection</h3>
+<p>La détection d’une cible s’effectue dans cet ordre :</p>
+<ol>
+<li><strong>Distance au carré</strong> : rejeter immédiatement une cible hors portée.</li>
+<li><strong>Produit scalaire du cône</strong> : rejeter une cible derrière l’observateur ou hors de son angle de vision.</li>
+<li><strong>Raycast d’occlusion</strong> : effectuer le test physique plus coûteux uniquement pour les candidates restantes.</li>
+</ol>
+<p>Soient <code>O</code> la position de l’observateur, <code>T</code> la position testée, <code>f</code> son vecteur avant horizontal normalisé, <code>R</code> la portée et <code>α</code> le demi-angle du cône. On pose <code>v = T - O</code> et <code>d² = v·v</code>.</p>
+<ul>
+<li>Distance : rejeter si <code>d² &gt; R²</code>. La comparaison évite une racine carrée ; ne calculer <code>sqrt(d²)</code> que si une distance linéaire est effectivement requise.</li>
+<li>Cône : avec <code>u = v / |v|</code>, accepter si <code>f·u ≥ cos(α)</code>. Pour éviter la normalisation, si <code>d² &gt; 0</code>, comparer <code>f·v ≥ cos(α) * sqrt(d²)</code> ; on peut aussi comparer les carrés, mais il faut traiter séparément le signe de <code>f·v</code> afin de ne pas accepter un point situé derrière le capteur.</li>
+<li>Occlusion : tirer un rayon vers le point échantillonné. La cible n’est visible que si le premier impact admissible est la cible, ou si le rayon n’est bloqué par aucun obstacle avant elle.</li>
+</ul>
+<p>La portée et le cône sont des filtres géométriques déterministes et peu coûteux. Le raycast interroge la scène physique (broadphase puis tests de formes potentiellement nombreuses) : il ne doit pas être exécuté pour chaque objet sans préfiltrage. L’ordre des filtres réduit le nombre de requêtes physiques.</p>
+<h3 id="12-raycasting-3d-dans-unity">1.2 Raycasting 3D dans Unity</h3>
+<p>Un rayon est défini par une origine <code>o</code>, une direction <code>d</code> et une distance maximale <code>R</code>. Avec <code>Physics.Raycast</code>, la direction fournie doit être normalisée pour que la portée exprimée en unités monde corresponde à la longueur attendue. Le rayon couvre le segment <code>o + t d</code>, pour <code>0 ≤ t ≤ R</code>.</p>
+<ul>
+<li><strong>Origine</strong> : utiliser un point représentatif du capteur, typiquement un <code>Transform</code> dédié à hauteur des yeux. Un décalage depuis le pivot peut être calculé en repère local puis transformé en monde. Un pivot placé au sol introduit des faux blocages par le sol ou par la géométrie proche ; une origine trop haute peut faire passer le rayon au-dessus des obstacles. Le choix doit correspondre à la hauteur de perception du modèle.</li>
+<li><strong>Direction</strong> : pour un point <code>P</code>, calculer <code>P - o</code>, puis normaliser. Si sa norme est nulle ou quasi nulle, ne pas lancer le rayon.</li>
+<li><strong>Distance maximale</strong> : limiter la requête à la portée réelle du capteur, ou à la distance du point testé lorsque celle-ci est connue.</li>
+<li><strong>Résultat</strong> : <code>RaycastHit</code> fournit notamment le collider touché, le point d’impact et la distance. Comparer l’identité du collider au collider de la cible si l’on veut distinguer un obstacle d’un impact sur la cible.</li>
+</ul>
+<h3 id="13-filtrage-des-impacts">1.3 Filtrage des impacts</h3>
+<p>Les couches isolent les catégories pertinentes pour la physique. Le masque d’un seul layer s’obtient par <code>1 &lt;&lt; layer</code>; la combinaison de plusieurs couches par OU bit à bit (<code>|</code>). Le complément <code>~mask</code> inverse tous les bits du masque : il permet d’exclure une ou plusieurs couches seulement si les couches restantes sont explicitement maîtrisées. Pour la lisibilité et la sûreté, préférer un masque positif « obstacles » plutôt qu’un complément général.</p>
+<p><code>LayerMask.GetMask(&quot;Obstacle&quot;, &quot;World&quot;)</code> construit un masque à partir des noms de couches. Vérifier que les noms existent et que les colliders pertinents sont affectés aux couches attendues. <code>QueryTriggerInteraction.Ignore</code> exclut les triggers indépendamment du réglage global de requête ; choisir <code>Collide</code> ou <code>UseGlobal</code> uniquement si la sémantique du projet le demande.</p>
+<p>Exemples de sémantique bitwise :</p>
+<ul>
+<li><code>1 &lt;&lt; obstacleLayer</code> : inclure une couche ;</li>
+<li><code>(1 &lt;&lt; obstacleLayer) | (1 &lt;&lt; worldLayer)</code> : inclure deux couches ;</li>
+<li><code>~(1 &lt;&lt; targetLayer)</code> : inclure toutes les couches sauf celle de la cible — à éviter si cela inclut involontairement le joueur, les volumes de déclenchement ou des objets décoratifs.</li>
+</ul>
+<h3 id="14-maillage-procédural--anatomie-et-contraintes">1.4 Maillage procédural : anatomie et contraintes</h3>
+<p>Un éventail triangulé comprend un sommet central et une suite ordonnée de sommets de bord. Pour <code>N</code> intervalles angulaires, il faut <code>N + 1</code> rayons de bord et <code>N + 2</code> sommets (centre inclus). Chaque triangle du fan relie le centre à deux sommets de bord consécutifs. En convention d’indices, le triangle <code>i</code> est <code>(0, i + 1, i + 2)</code> ; vérifier le sens de winding selon le sens de parcours et le mode de rendu.</p>
+<ul>
+<li><strong>Repère monde / repère local</strong> : les raycasts et impacts sont exprimés dans le monde. Les sommets d’un <code>Mesh</code> assigné à un <code>MeshFilter</code> sont exprimés dans le repère local de l’objet. Convertir chaque point avec <code>Transform.InverseTransformPoint</code> avant de l’écrire dans le maillage ; convertir une origine ou un offset local vers le monde avec <code>Transform.TransformPoint</code>.</li>
+<li><strong>Indices</strong> : tableaux ou listes d’indices référencent la collection de sommets. Le nombre maximal d’indices et le type (<code>UInt16</code>/<code>UInt32</code>) doivent être cohérents avec le volume de géométrie ; l'éventail de cette séance reste normalement dans la limite <code>UInt16</code>.</li>
+<li><strong>UV</strong> : fournir une coordonnée par sommet si le matériau l’utilise. Des UV planaires normalisées permettent une texture stable ; des UV nulles conviennent seulement à un matériau sans besoin de coordonnées.</li>
+<li><strong>Géométrie</strong> : une visualisation plane du cône est construite dans le plan horizontal (XZ), à une hauteur de rendu constante. Les rayons physiques partent de la hauteur des yeux ; leurs points d’arrêt sont projetés sur le plan du maillage. Les collisions déterminent donc la limite horizontale visible sans produire un éventail incliné vers le sol.</li>
+<li><strong>Mise à jour</strong> : allouer les buffers et créer le <code>Mesh</code> une fois. Réutiliser tableaux ou listes préalloués, indices et capacités fixes. Ne pas créer de tableaux, listes, chaînes interpolées, LINQ, closures ou objets temporaires dans la boucle par frame. Éviter les getters qui retournent des copies, par exemple <code>mesh.vertices</code>, dans cette boucle. L’objectif imposé est <strong>0 B GC Alloc/frame</strong> pour la mise à jour du capteur et du maillage, à confirmer au Profiler ; les allocations d’initialisation hors boucle ne sont pas des allocations par frame.</li>
+</ul>
+<h2 id="2-api--outils-de-référence">2. API &amp; outils de référence</h2>
+<table>
+<thead>
+<tr>
+<th>API / type</th>
+<th>Usage et points d’attention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Physics.Raycast(origin, direction, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)</code></td>
+<td>Requête physique bornée et filtrée. Direction normalisée ; résultat booléen, <code>RaycastHit</code> rempli en cas d’impact.</td>
+</tr>
+<tr>
+<td><code>RaycastHit</code></td>
+<td><code>collider</code>, <code>point</code>, <code>normal</code>, <code>distance</code> : identifier le premier impact et construire le point de bord du maillage.</td>
+</tr>
+<tr>
+<td><code>LayerMask.GetMask(params string[] layerNames)</code></td>
+<td>Résoudre un masque par noms de layers ; ne pas rappeler inutilement dans la boucle par frame.</td>
+</tr>
+<tr>
+<td><code>Transform.TransformPoint(localPoint)</code></td>
+<td>Convertir une position locale en position monde, en tenant compte de la translation, rotation et échelle.</td>
+</tr>
+<tr>
+<td><code>Transform.InverseTransformPoint(worldPoint)</code></td>
+<td>Convertir une position monde en position locale du maillage.</td>
+</tr>
+<tr>
+<td><code>Mesh.Clear(bool keepVertexLayout = true)</code></td>
+<td>Effacer la géométrie ; à réserver à l’initialisation ou à une vraie reconstruction de topologie, pas à une stratégie naïve d’allocation chaque frame.</td>
+</tr>
+<tr>
+<td><code>Mesh.SetVertices(...)</code></td>
+<td>Écrire les positions depuis un buffer réutilisé (par exemple <code>List&lt;Vector3&gt;</code> préallouée). Éviter de reconstruire la collection à chaque frame.</td>
+</tr>
+<tr>
+<td><code>Mesh.SetTriangles(...)</code></td>
+<td>Affecter les indices du fan. Si la topologie ne change pas, les indices peuvent être fixés une seule fois.</td>
+</tr>
+<tr>
+<td><code>Mesh.SetUVs(...)</code></td>
+<td>Affecter les UV depuis un buffer réutilisé lorsque le matériau en a besoin.</td>
+</tr>
+</tbody>
+</table>
+<p>Les signatures exactes varient selon la version d’Unity ; consulter la documentation de la version cible. Un appel API qui semble éviter <code>new</code> ne dispense pas d’une mesure avec le Profiler.</p>
+<h2 id="3-exercice-1--le-floor-socle-obligatoire">3. Exercice 1 — Le Floor (socle obligatoire)</h2>
+<h3 id="énoncé-technique">Énoncé technique</h3>
+<p>Mettre en place la base fonctionnelle du capteur de ligne de vue dans une scène de test au sol. Un observateur possède un point de vue explicite à hauteur des yeux, une portée <code>R</code>, un demi-angle <code>α</code> et un masque de couches d’obstacles. Une cible possède au moins un point de test et un collider identifiable. Pour chaque cible, appliquer la cascade distance → cône → raycast. Le statut visible est vrai uniquement si la cible passe les deux filtres géométriques et qu’aucun obstacle admissible ne coupe le segment entre le point de vue et le point de test.</p>
+<p>Le nom <strong>Floor</strong> désigne ici le socle de validation : la scène, les couches et le détecteur de base sur lesquels reposent les exercices suivants. Configurer le sol et les éléments de test de façon à ce que le sol ne bloque pas les rayons horizontaux ; utiliser des couches explicites plutôt qu’une exclusion implicite. Exposer les paramètres utiles dans l’Inspector. Visualiser au minimum le cône, le rayon de validation et un état visible/occulté distinct.</p>
+<h3 id="architecture-attendue">Architecture attendue</h3>
+<ul>
+<li>Un composant capteur responsable des paramètres, du point de vue et de la cascade de détection.</li>
+<li>Une définition de cible permettant d’obtenir le collider et le point de test sans recherche de scène par frame.</li>
+<li>Des couches séparées et documentées pour les obstacles, les cibles et le décor non bloquant.</li>
+<li>Une mise à jour du statut au rythme défini (par frame ou à intervalle fixe), sans requêtes redondantes dans plusieurs composants.</li>
+<li>Des paramètres invalides traités explicitement : portée positive, demi-angle dans <code>[0°, 180°]</code>, direction non nulle.</li>
+</ul>
+<p><img src="https://github.com/3dtr/m1/blob/main/M1C04-floor.gif?raw=true" alt="Floor"></p>
+<h3 id="critères-dacceptation--validation-technique">Critères d’acceptation / validation technique</h3>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">Le point d’origine du raycast est placé à la hauteur de vision retenue, pas implicitement au pivot du personnage.</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">La direction du rayon est normalisée et sa portée maximale est explicitement bornée.</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">La distance est testée au carré avant toute normalisation coûteuse ou requête physique.</label></li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">Le test de cône utilise un produit scalaire et respecte les limites angulaires.</label></li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">Aucun raycast n’est exécuté pour une cible éliminée par distance ou par cône.</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">Le masque ne contient que les couches pertinentes ; les triggers sont ignorés selon la spécification.</label></li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">Un mur entre l’observateur et la cible invalide la ligne de vue ; retirer le mur la rétablit.</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">Une cible hors portée ou derrière l’observateur est rejetée.</label></li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">Le résultat distingue clairement « hors cône », « occulté » et « visible » (au minimum dans le débogage).</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">Le sol ou les éléments de décor non bloquants ne provoquent pas de faux blocage.</label></li>
+</ul>
+<h2 id="4-exercice-2--powerup-1--occlusion-partielle--multi-point-raycast">4. Exercice 2 — Powerup 1 : occlusion partielle &amp; multi-point raycast</h2>
+<h3 id="énoncé-technique-1">Énoncé technique</h3>
+<p>Étendre le test à plusieurs points échantillonnés sur le volume de la cible. Définir un ensemble stable de <code>N ≥ 3</code> points (par exemple centre et points latéraux), calculés à partir du collider ou de repères dédiés. Chaque point candidat reçoit d’abord le test distance/cône, puis un raycast borné depuis le point de vue. Un échantillon est visible si le premier impact est le collider de la cible — ou si le rayon atteint son point sans obstacle, selon la géométrie retenue.</p>
+<p>Le <strong>ratio de couverture</strong> est défini ici comme <code>C = V / E</code>, où <code>V</code> est le nombre de points échantillonnés visibles et <code>E</code> le nombre de points échantillonnés admissibles (dans la portée et le cône). Si <code>E = 0</code>, la cible n’est pas détectée. Déclarer la cible partiellement visible lorsque <code>C ≥ τ</code>, où le seuil <code>τ</code> est exposé et documenté. Valeur de référence pour les tests : <code>τ = 0,5</code>. Ce ratio est un indicateur discret de visibilité des points, pas une mesure exacte de surface visible.</p>
+<p>Comparer au minimum une cible dégagée et une cible masquée par un obstacle couvrant une partie du volume. Vérifier que le résultat évolue de façon cohérente en déplaçant l’obstacle et que le nombre de requêtes physiques est borné par <code>N</code> par cible et par évaluation.</p>
+<p><img src="https://github.com/3dtr/m1/blob/main/M1C04-pu1.gif?raw=true" alt="PU1"></p>
+<h3 id="critères-dacceptation--validation-technique-1">Critères d’acceptation / validation technique</h3>
+<ul>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">Au moins cinq points de test distincts couvrent le volume de la cible ; leur définition est stable et documentée.</label></li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11">Les points hors portée ou hors cône ne sont pas comptés comme visibles ; <code>E</code> est incrémenté uniquement pour les échantillons admissibles.</label></li>
+<li><input type="checkbox" id="checkbox12"><label for="checkbox12">Le cas <code>E = 0</code> est traité sans division par zéro et retourne non détecté.</label></li>
+<li><input type="checkbox" id="checkbox13"><label for="checkbox13">Le ratio est calculé comme <code>V / E</code> et le seuil <code>τ</code> est configurable ; le test de référence utilise <code>0,5</code>.</label></li>
+<li><input type="checkbox" id="checkbox14"><label for="checkbox14">Une occultation partielle laisse détecter la cible si le ratio atteint le seuil, et la rejette si le ratio est inférieur.</label></li>
+<li><input type="checkbox" id="checkbox15"><label for="checkbox15">Un impact sur un collider autre que celui de la cible n’est jamais compté comme visible.</label></li>
+<li><input type="checkbox" id="checkbox16"><label for="checkbox16">Le nombre de raycasts par cible et par évaluation ne dépasse pas le nombre d’échantillons admissibles.</label></li>
+<li><input type="checkbox" id="checkbox17"><label for="checkbox17">Les états « entièrement visible », « partiellement visible » et « non détectée » sont distinguables dans le résultat ou le débogage.</label></li>
+</ul>
+<h2 id="5-exercice-3--powerup-2--visualisation-procédurale-du-fov-occulté-vision-mesh">5. Exercice 3 — Powerup 2 : visualisation procédurale du FOV occulté (Vision Mesh)</h2>
+<h3 id="énoncé-technique-2">Énoncé technique</h3>
+<p>Construire un maillage triangulé représentant la région visible dans le plan horizontal. Le capteur et son cône utilisent les paramètres des exercices précédents. Discrétiser l’arc du champ de vision en <code>N</code> intervalles uniformes, soit <code>N + 1</code> directions incluant exactement les deux limites du cône. Pour chaque angle <code>θᵢ = -α + i(2α/N)</code>, générer une direction horizontale normalisée autour de l’axe avant.</p>
+<p>Lancer un raycast de portée maximale <code>R</code> sur chaque direction, avec le masque d’obstacles et <code>QueryTriggerInteraction.Ignore</code>. La distance d’arrêt est <code>hit.distance</code> en cas d’impact, sinon <code>R</code>. Former le point monde d’arrivée sur le plan horizontal de vision à partir de l’origine projetée au sol et de la direction multipliée par cette distance. Les impacts sont ainsi visualisés comme limites d’occlusion dans le plan ; les rayons physiques restent à hauteur des yeux.</p>
+<p>Générer un fan : sommet central puis les <code>N + 1</code> points d’arrivée ordonnés. Affecter les triangles <code>(0, i + 1, i + 2)</code> pour <code>0 ≤ i &lt; N</code>. Convertir les points monde dans le repère local du <code>MeshFilter</code> avant <code>Mesh.SetVertices</code>. Affecter des UV cohérentes si le matériau en utilise. Vérifier le winding, les normales, le mode de face du matériau et les bounds afin d’éviter un maillage invisible ou tronqué.</p>
+<h3 id="contraintes-dimplémentation">Contraintes d’implémentation</h3>
+<ul>
+<li>La résolution angulaire <code>N</code> est fixe pendant l’exécution ou les buffers sont redimensionnés uniquement lors d’un changement de configuration, hors chemin par frame.</li>
+<li>Créer le maillage, les tableaux/listes de sommets, UV et indices une seule fois ; préallouer à la capacité exacte ou supérieure.</li>
+<li>Préconstruire les indices du fan et les UV statiques si leur disposition ne change pas. Mettre à jour uniquement les positions et les bounds nécessaires.</li>
+<li>Ne pas appeler de getter allouant de copie ni construire de collection temporaire dans la boucle de raycasts.</li>
+<li>Mesurer la mise à jour isolée avec le Profiler Unity : cible impérative <strong>0 B GC Alloc/frame</strong> en régime établi. Une allocation d’initialisation ou de reconfiguration hors de la boucle n’autorise pas d’allocation par frame.</li>
+<li>Si le maillage est mis à jour chaque frame, choisir explicitement <code>Update</code>, <code>LateUpdate</code> ou une fréquence moindre selon le mouvement du capteur ; éviter le double calcul dans plusieurs callbacks.</li>
+</ul>
+<p><img src="https://github.com/3dtr/m1/blob/main/M1C04-pu2.gif?raw=true" alt="PU2"></p>
+<h3 id="critères-dacceptation--validation-technique-2">Critères d’acceptation / validation technique</h3>
+<ul>
+<li><input type="checkbox" id="checkbox18"><label for="checkbox18">L’arc discrétisé inclut exactement les deux bords du cône et contient <code>N + 1</code> directions pour <code>N</code> intervalles.</label></li>
+<li><input type="checkbox" id="checkbox19"><label for="checkbox19">Chaque rayon est normalisé, borné par <code>R</code>, et utilise le masque et la politique de triggers prévus.</label></li>
+<li><input type="checkbox" id="checkbox20"><label for="checkbox20">Les points d’arrêt correspondent au premier obstacle ou à la portée maximale en absence d’impact.</label></li>
+<li><input type="checkbox" id="checkbox21"><label for="checkbox21">Le maillage suit les occultations : les obstacles rapprochent localement la limite visible, sans réduire les secteurs dégagés.</label></li>
+<li><input type="checkbox" id="checkbox22"><label for="checkbox22">Le fan contient <code>N + 2</code> sommets et <code>N</code> triangles, avec indices valides et winding vérifié.</label></li>
+<li><input type="checkbox" id="checkbox23"><label for="checkbox23">Les coordonnées sont converties du monde vers le local du <code>MeshFilter</code> ; le maillage reste correct si son transform est déplacé ou tourné.</label></li>
+<li><input type="checkbox" id="checkbox24"><label for="checkbox24">Le plan de visualisation est horizontal et les raycasts partent de la hauteur des yeux.</label></li>
+<li><input type="checkbox" id="checkbox25"><label for="checkbox25">Les UV, normales, bounds et matériau permettent un rendu stable, sans face manquante ni clipping.</label></li>
+<li><input type="checkbox" id="checkbox26"><label for="checkbox26">Les buffers et la topologie sont réutilisés ; aucune allocation managée n’est observée par frame après initialisation.</label></li>
+<li><input type="checkbox" id="checkbox27"><label for="checkbox27">Le Profiler confirme <code>0 B GC Alloc/frame</code> pour la mise à jour du capteur et du Vision Mesh en régime établi.</label></li>
+</ul>
+<h2 id="livraison-attendue">Livraison attendue</h2>
+<p>Une scène de démonstration des trois niveaux, les composants source, les paramètres de layers documentés et une courte validation instrumentée. Pour le Powerup 2, joindre une capture du Profiler montrant l’absence d’allocation managée par frame après échauffement. Les choix de fréquence de mise à jour, d’échantillonnage et de seuil de couverture doivent être explicités.</p>
+
+</body>
+</html>

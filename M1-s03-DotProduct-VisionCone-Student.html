@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>M1-S03-Student-Worksheet.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="master-1--session-03--fiche-étudiant">Master 1 · Session 03 — Fiche étudiant</h1>
+<h2 id="maths-3d-i--vecteur-direction--dot-product">Maths 3D I : vecteur direction &amp; dot product</h2>
+<h3 id="cône-de-vision-du-garde--tactical-infiltration">Cône de vision du garde · Tactical Infiltration</h3>
+<p><strong>Nom :</strong> ____________________  <strong>Binôme :</strong> ____________________  <strong>Date :</strong> __________<br>
+<strong>Durée :</strong> 3 h · <strong>Floor obligatoire avant Powerups</strong> · <strong>S03 précède S04 : Raycasting &amp; Occlusion</strong></p>
+<blockquote>
+<p><strong>Mission.</strong> Construire une détection horizontale qui retourne <code>true</code> si la cible est dans la portée et dans le cône du garde. Le code utilise <code>Vector3.Dot</code> et un seuil en cosinus.</p>
+</blockquote>
+<hr>
+<h2 id="1-résultats-attendus">1. Résultats attendus</h2>
+<p>À la fin, je peux :</p>
+<ul>
+<li>distinguer position, déplacement et direction unitaire ;</li>
+<li>calculer <code>target.position - guard.position</code> ;</li>
+<li>projeter une relation 3D sur le plan top-down XZ ;</li>
+<li>expliquer <code>a · b = |a||b|cos(θ)</code> ;</li>
+<li>utiliser <code>dot &gt;= cos(halfFov)</code> sans <code>Vector3.Angle</code> ni <code>Mathf.Acos</code> ;</li>
+<li>tester la portée par <code>sqrMagnitude &lt;= maxDistance²</code> ;</li>
+<li>prédire les cas limites et les prouver avec des Gizmos ;</li>
+<li>relier le détecteur à la position produite par S02 sans coupler les scripts.</li>
+</ul>
+<h2 id="2-théorie--la-fiche-courte">2. Théorie — la fiche courte</h2>
+<h3 id="21-positions-et-vecteurs">2.1 Positions et vecteurs</h3>
+<p>Une <strong>position</strong> est un point dans le monde. Pour aller du garde <code>G</code> à la cible <code>P</code> :</p>
+<pre class="hljs"><code><div>toTarget = P - G
+</div></code></pre>
+<p>Le signe et l’ordre comptent : <code>G - P</code> pointe dans la direction inverse. Une <strong>direction unitaire</strong> a une longueur de 1 ; elle conserve l’orientation, pas la distance.</p>
+<h3 id="22-contrat-top-down-xz">2.2 Contrat top-down XZ</h3>
+<p>Dans ce jeu, <code>Y</code> est la verticale. On raisonne sur le sol :</p>
+<pre class="hljs"><code><div>flatToTarget = new Vector3(delta.x, 0f, delta.z)
+flatForward  = new Vector3(forward.x, 0f, forward.z)
+</div></code></pre>
+<p>La projection est faite <strong>avant</strong> le test de distance et <strong>avant</strong> la normalisation. Si le vecteur horizontal est quasi nul, la direction n’est pas définie : le Floor retourne <code>false</code>.</p>
+<h3 id="23-dot-product">2.3 Dot product</h3>
+<pre class="hljs"><code><div>a · b = ax*bx + ay*by + az*bz
+a · b = |a| * |b| * cos(θ)
+</div></code></pre>
+<p>Si <code>a</code> et <code>b</code> sont unitaires, <code>a · b = cos(θ)</code>. Sur <code>[0°,180°]</code> : plus le dot est grand, plus l’angle est petit.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Angle</th>
+<th style="text-align:right">Cosinus</th>
+<th>Lecture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0°</td>
+<td style="text-align:right">1.000</td>
+<td>parfaitement en face</td>
+</tr>
+<tr>
+<td style="text-align:right">30°</td>
+<td style="text-align:right">0.866</td>
+<td>proche de l’axe</td>
+</tr>
+<tr>
+<td style="text-align:right">45°</td>
+<td style="text-align:right">0.707</td>
+<td>bord d’un FOV total de 90°</td>
+</tr>
+<tr>
+<td style="text-align:right">90°</td>
+<td style="text-align:right">0.000</td>
+<td>sur le côté</td>
+</tr>
+<tr>
+<td style="text-align:right">180°</td>
+<td style="text-align:right">-1.000</td>
+<td>derrière</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-test-de-cône-et-portée">2.4 Test de cône et portée</h3>
+<p>Pour un FOV <strong>total</strong> de 90°, le demi-FOV vaut 45°. Le seuil est :</p>
+<pre class="hljs"><code><div>cosHalfFov = cos(fieldOfViewDegrees * 0.5 * Deg2Rad)
+insideAngle = dot(unitHeading, unitToTarget) &gt;= cosHalfFov
+</div></code></pre>
+<p>La frontière est incluse (<code>&gt;=</code>). Pour la portée :</p>
+<pre class="hljs"><code><div>withinRange = flatToTarget.sqrMagnitude &lt;= maxDistance * maxDistance
+</div></code></pre>
+<p>On ne calcule pas une racine carrée quand on ne cherche qu’une comparaison.</p>
+<h2 id="3-calcul-papier">3. Calcul papier</h2>
+<p>Donné : <code>forward = (0,0,1)</code>, <code>toTarget = (3,0,4)</code>, FOV total = 90°, portée = 8.</p>
+<ol>
+<li>Longueur horizontale de <code>toTarget</code> : ________________________________</li>
+<li>Direction unitaire : _______________________________________________</li>
+<li><code>forward · unitToTarget</code> : _________________________________________</li>
+<li>Seuil <code>cos(45°)</code> ≈ __________</li>
+<li>Détection ? Pourquoi ? _____________________________________________</li>
+<li>Avec <code>toTarget = (3,4,4)</code>, que donne la projection XZ ? ______________</li>
+</ol>
+<p><strong>Correction de contrôle :</strong> longueur 5 ; unité <code>(0.6,0,0.8)</code> ; dot 0.8 ; seuil ≈ 0.707 ; vrai. Avec Y=4, même projection et même résultat top-down.</p>
+<h2 id="4-pseudocode-à-compléter">4. Pseudocode à compléter</h2>
+<pre class="hljs"><code><div>function IsDetected(guard, target, fovDegrees, maxDistance):
+    si target est absent : ______________________________
+    delta = ____________________________________________
+    delta.y = __________________________________________
+    forward = _________________________________________
+    forward.y = _______________________________________
+    si delta horizontal est quasi nul : _________________
+    si forward horizontal est quasi nul : ______________
+    si distance au carré &gt; _____________________________
+    unitToTarget = ____________________________________
+    unitHeading = _____________________________________
+    dot = _____________________________________________
+    seuil = ____________________________________________
+    retourner _________________________________________
+</div></code></pre>
+<h2 id="5-matrice-de-tests--prédiction--exécution--explication">5. Matrice de tests — prédiction → exécution → explication</h2>
+<table>
+<thead>
+<tr>
+<th>Cas</th>
+<th>Position cible relative</th>
+<th>Prédiction</th>
+<th>Résultat observé</th>
+<th>Explication / preuve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Devant, proche</td>
+<td><code>(0,0,4)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Devant, hors portée</td>
+<td><code>(0,0,9)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Limite droite</td>
+<td><code>(4,0,4)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Côté</td>
+<td><code>(5,0,0)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Derrière</td>
+<td><code>(0,0,-4)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Hauteur ignorée</td>
+<td><code>(0,5,4)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Même projection</td>
+<td><code>(0,4,0)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Garde tourné vers +X</td>
+<td>cible devant ancien axe</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-floor--spécification-non-négociable">6. Floor — spécification non négociable</h2>
+<p>Construire <code>VisionConeDetector</code> Unity avec :</p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0"><code>Transform</code> cible référencé dans l’Inspector ;</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">FOV total en degrés, protégé dans <code>[1,360]</code> ;</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">portée positive ;</label></li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">calcul en world space ;</label></li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">projection XZ ;</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5"><code>Vector3.Dot</code> entre directions unitaires ;</label></li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">seuil <code>cos(halfFov)</code> ;</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">bord angulaire inclus ;</label></li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">bord de portée inclus ;</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">cible absente → <code>false</code>, aucun crash ;</label></li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">même projection XZ → <code>false</code> ;</label></li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11">heading horizontal nul → état invalide documenté / <code>false</code> ;</label></li>
+<li><input type="checkbox" id="checkbox12"><label for="checkbox12">Gizmos : origine, heading, deux bords, cible et projection ;</label></li>
+<li><input type="checkbox" id="checkbox13"><label for="checkbox13"><strong>hors périmètre :</strong> Raycast, murs, FSM, patrouille, tir.</label></li>
+</ul>
+<h3 id="apis-interdites-dans-le-floor">APIs interdites dans le Floor</h3>
+<table>
+<thead>
+<tr>
+<th>Interdit</th>
+<th>Pourquoi</th>
+<th>Alternative</th>
+<th>Vérifié</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Vector3.Angle</code></td>
+<td>cache l’opération visée</td>
+<td>dot + seuil cosinus</td>
+<td>☐</td>
+</tr>
+<tr>
+<td><code>Mathf.Acos</code></td>
+<td>angle exact inutile</td>
+<td>comparaison monotone</td>
+<td>☐</td>
+</tr>
+<tr>
+<td><code>Physics.Raycast</code> comme condition</td>
+<td>occlusion = S04</td>
+<td>test géométrique seul</td>
+<td>☐</td>
+</tr>
+<tr>
+<td><code>Camera.main</code> pour la géométrie</td>
+<td>perception en world space</td>
+<td>positions Transform</td>
+<td>☐</td>
+</tr>
+<tr>
+<td><code>FindObjectOfType</code> dans <code>Update</code></td>
+<td>recherche instable/coûteuse</td>
+<td>référence Inspector</td>
+<td>☐</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-pitfalls--symptômes-et-correction">7. Pitfalls — symptômes et correction</h2>
+<table>
+<thead>
+<tr>
+<th>Symptôme</th>
+<th>Cause à vérifier</th>
+<th>Correction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tout est détecté, même derrière</td>
+<td>normalisation / comparaison inversée</td>
+<td><code>dot &gt;= cosHalfFov</code> avec unités</td>
+</tr>
+<tr>
+<td>Rien n’est détecté</td>
+<td>degrés passés directement à <code>Cos</code></td>
+<td><code>* Mathf.Deg2Rad</code></td>
+</tr>
+<tr>
+<td>Cône deux fois trop étroit</td>
+<td>demi-FOV appliqué deux fois</td>
+<td><code>fieldOfView * 0.5f</code> une fois</td>
+</tr>
+<tr>
+<td>Bord clignotant</td>
+<td><code>&gt;</code> ou flottants</td>
+<td>contrat <code>&gt;=</code>, test limite</td>
+</tr>
+<tr>
+<td>Hauteur modifie le résultat</td>
+<td>Y conservé</td>
+<td>projection XZ avant tests</td>
+</tr>
+<tr>
+<td>Garde regarde le ciel</td>
+<td>forward XZ nul</td>
+<td>refuser / corriger heading</td>
+</tr>
+<tr>
+<td>Cible au centre détectée</td>
+<td>vecteur nul normalisé</td>
+<td>retourner <code>false</code></td>
+</tr>
+<tr>
+<td>Portée varie</td>
+<td>mauvais espace ou mauvaise valeur</td>
+<td><code>sqrMagnitude</code> XZ vs <code>max²</code></td>
+</tr>
+<tr>
+<td>Gizmo à l’envers</td>
+<td>degrés/radians ou signe</td>
+<td>tester forward <code>+Z</code></td>
+</tr>
+<tr>
+<td>Console illisible</td>
+<td><code>Debug.Log</code> par frame</td>
+<td>Gizmos / log sur changement</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-relier-s02-sans-coupler">8. Relier S02 sans coupler</h2>
+<ul>
+<li>La donnée qui traverse la frontière entre systèmes est : ____________________.</li>
+<li>Le détecteur modifie-t-il le Rigidbody / la vélocité du joueur ? ____________.</li>
+<li>La caméra est-elle nécessaire au calcul ? _________________________________.</li>
+<li>Après une téléportation valide, la prochaine évaluation doit-elle lire la nouvelle position ? ______</li>
+</ul>
+<p>Phrase à retenir : <strong>S02 produit une position ; S03 transforme cette position en relation géométrique avec le heading du garde.</strong></p>
+<h2 id="9-powerups--contrats-et-preuves">9. Powerups — contrats et preuves</h2>
+<h3 id="powerup-1--optimisation-et-cadence">Powerup 1 · optimisation et cadence</h3>
+<p>Permettre une fréquence configurable (ex. 0,1 s), mettre en cache <code>cosHalfFov</code>, éviter les recherches globales et fournir une mesure ou justification du compromis réactivité/coût.</p>
+<p><strong>Preuve :</strong> ____________________________________________________________</p>
+<h3 id="powerup-2--gizmo--outil-éditeur">Powerup 2 · Gizmo / outil éditeur</h3>
+<p>Rendre le secteur XZ plus lisible : seuil, distance, projection cible, couleur calme/détection, rotation cohérente. L’outil ne modifie pas le gameplay.</p>
+<p><strong>Preuve :</strong> ____________________________________________________________</p>
+<h3 id="powerup-3--comparaison-contrôlée">Powerup 3 · comparaison contrôlée</h3>
+<p>Créer une référence trigonométrique dans un script de test/debug et comparer plusieurs positions. Aucun appel trigonométrique ne passe dans le Floor.</p>
+<p><strong>Preuve :</strong> ____________________________________________________________</p>
+<h2 id="10-checklists-de-sortie">10. Checklists de sortie</h2>
+<h3 id="scène">Scène</h3>
+<ul>
+<li><input type="checkbox" id="checkbox14"><label for="checkbox14">Plane à <code>Y=0</code>, garde orienté lisiblement, joueur référencé.</label></li>
+<li><input type="checkbox" id="checkbox15"><label for="checkbox15">FOV et portée réglés et testés.</label></li>
+<li><input type="checkbox" id="checkbox16"><label for="checkbox16">Devant proche = vrai ; derrière = faux ; hors portée = faux.</label></li>
+<li><input type="checkbox" id="checkbox17"><label for="checkbox17">Limite angulaire testée avec <code>&gt;=</code>.</label></li>
+<li><input type="checkbox" id="checkbox18"><label for="checkbox18">Hauteur testée : résultat identique en projection XZ.</label></li>
+<li><input type="checkbox" id="checkbox19"><label for="checkbox19">Gizmos montrent heading, bords, portée et projection.</label></li>
+</ul>
+<h3 id="code">Code</h3>
+<ul>
+<li><input type="checkbox" id="checkbox20"><label for="checkbox20">Projet compilé sans erreur.</label></li>
+<li><input type="checkbox" id="checkbox21"><label for="checkbox21">Projection <code>Y=0</code> visible avant normalisation.</label></li>
+<li><input type="checkbox" id="checkbox22"><label for="checkbox22">Vecteurs quasi nuls sûrs.</label></li>
+<li><input type="checkbox" id="checkbox23"><label for="checkbox23">Distance au carré.</label></li>
+<li><input type="checkbox" id="checkbox24"><label for="checkbox24"><code>Vector3.Dot</code> présent.</label></li>
+<li><input type="checkbox" id="checkbox25"><label for="checkbox25">Recherche des tokens interdits = zéro dans le Floor.</label></li>
+<li><input type="checkbox" id="checkbox26"><label for="checkbox26">Pas de Raycast requis pour S03.</label></li>
+</ul>
+<h2 id="11-exit-ticket">11. Exit ticket</h2>
+<ol>
+<li>En une phrase, pourquoi ne calcule-t-on pas <code>Vector3.Angle</code> dans le Floor ?</li>
+</ol>
+<hr>
+<ol start="2">
+<li>Quel est le comportement attendu si la cible partage exactement le même XZ que le garde ?</li>
+</ol>
+<hr>
+
+</body>
+</html>
